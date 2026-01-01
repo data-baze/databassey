@@ -117,7 +117,7 @@ const SkillsSection = () => {
                   transition={{ duration: 0.3, delay: idx * 0.03 }}
                   whileHover={{ scale: 1.05 }}
                   viewport={{ once: true }}
-                  className="text-xs px-3 py-1 rounded-full border border-brand-primary/15 bg-white/5 text-brand-primary/70 hover:bg-white/[0.08] hover:border-brand-primary/30 transition"
+                  className="text-xs px-3 py-1 rounded-full border border-brand-primary/15 bg-white/5 text-brand-primary/70 hover:bg-white/8 hover:border-brand-primary/30 transition"
                 >
                   {item}
                 </motion.span>
