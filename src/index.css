@@ -118,3 +118,49 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Marquee logo slider */
+.marquee {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-track img {
+  height: 3rem; /* matches h-12 used in JSX */
+  width: auto;
+  flex-shrink: 0;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 640px) {
+  .marquee-track {
+    animation-duration: 30s;
+  }
+
+  .marquee-track img {
+    height: 2.5rem; /* slightly smaller logos */
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

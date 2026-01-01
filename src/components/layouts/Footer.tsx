@@ -1,5 +1,6 @@
 import { ArrowUpRight, ArrowUp } from "lucide-react";
 import { socials } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const pagesLinks = [
@@ -36,10 +37,13 @@ const Footer = () => {
             stand out.
           </p>
           <div className="flex justify-center mt-8">
-            <button className="text-center px-6 py-3 bg-brand-primary border border-brand-primary/10 hover:bg-brand-secondary hover:text-brand-primary hover:border hover:border-brand-primary text-brand-black  text-sm font-normal flex items-center gap-2  hover:opacity-80 transition">
+            <a
+              href="mailto:basseydata@gmail.com"
+              className="text-center px-6 py-3 bg-brand-primary border border-brand-primary/10 hover:bg-brand-secondary hover:text-brand-primary hover:border hover:border-brand-primary text-brand-black  text-sm font-normal flex items-center gap-2  hover:opacity-80 transition"
+            >
               GET IN TOUCH
               <ArrowUpRight size={16} />
-            </button>
+            </a>
           </div>
         </div>
 
@@ -97,10 +101,13 @@ const Footer = () => {
               ))}
             </ul>
 
-            <button className="mt-6 px-5 py-2 whitespace-nowrap border border-brand-primary text-brand-primary text-sm font-normal flex items-center gap-2 hover:bg-brand-primary hover:text-brand-black transition ">
+            <Link
+              to={"/contact"}
+              className="mt-6 px-5 py-2 whitespace-nowrap border border-brand-primary text-brand-primary text-sm font-normal flex items-center gap-2 hover:bg-brand-primary hover:text-brand-black transition "
+            >
               LET'S TALK
               <ArrowUpRight size={14} />
-            </button>
+            </Link>
           </div>
 
           <div>
@@ -138,7 +145,7 @@ const Footer = () => {
         </div>
 
         <div className="py-8 flex items-center justify-between text-xs text-brand-primary">
-          <p>© 2025 Made by Data. Powered by Framer.</p>
+          <p>© 2025 Made by Data. With ❣️ from Lagos</p>
           <div className=" text-sm font-normal text-brand-primary flex items-center gap-4">
             <p>TO TOP</p>
             <button className="p-2 rounded-full bg-brand-primary/5 border border-brand-primary/15 text-brand-primary">

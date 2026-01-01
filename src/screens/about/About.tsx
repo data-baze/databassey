@@ -1,5 +1,8 @@
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { socials } from "../../components/utils/constants";
+import { CertificateCard } from "./components/CertificateCards";
+import { motion } from "framer-motion";
+import { CareerTimeline } from "./components/CareerTimeline";
 
 const certificates = [
   {
@@ -50,11 +53,12 @@ export default function About() {
   return (
     <div className="text-brand-primary">
       {/* HERO */}
-      <div className="flex flex-col md:flex-row items-center  text-center px-6 md:px-20 lg:px-40 pt-4 md:pt-20 ">
+      <div className="flex flex-col md:flex-row items-center  text-center px-4 md:px-20 lg:px-40 pt-4 md:pt-20 ">
         <div className="w-full md:w-1/2 self-start">
           <img
-            src="/portrait.png"
-            className="w-48 h-48 object-cover rounded-full opacity-90"
+            src="/images/new.png"
+            alt="portrait"
+            className="h-80 w-80 object-cover opacity-80 mb-10 mask-[linear-gradient(to_bottom,#0E0E0E_70%,transparent_92%)]"
           />
         </div>
         <div className="flex flex-col py-4 md:max-w-7/12">
@@ -64,8 +68,9 @@ export default function About() {
               <h2 className="text-5xl italic">Bassey</h2>
 
               <p className="text-brand-primary/60 max-w-lg mt-4 leading-relaxed font-chillax text-sm">
-                Delivering premium Web Design and Development Services to Boost
-                Your Online Presence.
+                Senior Frontend Developer with 6+ years of experience building
+                scalable, high-performance web applications and Progressive Web
+                Apps (PWAs).
               </p>
             </div>
             <div className=" text-sm font-normal text-brand-primary flex items-center gap-4 py-6">
@@ -79,21 +84,24 @@ export default function About() {
           <section className="">
             <div className="bg-white/5 border text-left border-brand-primary/15 px-4 py-8">
               <h3 className="text-xl mb-4">
-                Your Partner in Bringing Your Web Design Vision to Life
+                Senior Frontend Engineer — Architecture, Performance & Scale
               </h3>
 
               <p className="text-brand-primary/60 text-sm leading-relaxed mb-6">
-                I help businesses create beautiful, modern, and high-performing
-                websites that drive results. With years of experience in design
-                and development, I tailor each project to meet unique business
-                needs.
+                I design and build production-grade frontend systems for fintech
+                and enterprise environments. My work focuses on clean, scalable
+                architecture using Separation of Concerns (SoC), SOLID
+                principles, and DRY practices. I have owned frontend systems
+                end-to-end, led teams, mentored engineers, and collaborated
+                closely with backend, product, AI, and DevOps teams to deliver
+                secure, accessible, and high-performing applications.
               </p>
 
               {/* Secondary Portrait */}
-              <img
+              {/* <img
                 src="/portrait2.png"
                 className="w-full h-64 object-cover rounded-lg"
-              />
+              /> */}
             </div>
           </section>
 
@@ -118,28 +126,27 @@ export default function About() {
             ))}
           </div>
 
-          {/* EXPERIENCE ACCORDION (STATIC MOCK-UP) */}
           <section className="space-y-3 py-3 text-left mt-4 bg-brand-primary/5 px-2">
-            <h3 className="mb-2 text-xl p-4">CERTIFICATE & COURSES</h3>
+            <h3 className="mb-2 text-xl p-4">
+              CERTIFICATE & CONTINUOUS LEARNING
+            </h3>
             {certificates.map((item, i) => (
-              <div
+              <CertificateCard
                 key={i}
-                className="border-b gap-2 border-brand-primary/15 text-sm p-4 rounded-lg flex justify-between"
-              >
-                <span className="max-w-none md:max-w-8/12 ">{item.title}</span>
-                <span className="text-brand-primary/60 whitespace-nowrap">
-                  {item.date}
-                </span>
-              </div>
+                title={item.title}
+                href={item.href}
+                date={item.date}
+              />
             ))}
           </section>
 
           <section className="space-y-3 py-3 text-left mt-4 bg-brand-primary/5 px-2">
             <h3 className="mb-2 text-xl p-4">EDUCATION </h3>
             {education.map((item, i) => (
-              <div
+              <motion.div
+                whileHover={{ scale: 1.02 }}
                 key={i}
-                className="flex justify-between gap-2 items-center p-4 border-b border-brand-primary/15 text-sm rounded-lg "
+                className="flex justify-between gap-2 items-center p-4 border-b border-brand-primary/15 text-sm rounded-lg hover:bg-linear-to-b from-brand-primary/5 to-brand-primary-10/2 transition"
               >
                 <div className="flex flex-col gap-2 ">
                   <h3>{item.name}</h3>
@@ -148,11 +155,12 @@ export default function About() {
                 <span className="text-brand-primary/60 whitespace-nowrap">
                   {item.date}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </section>
         </div>
       </div>
+      <CareerTimeline />
     </div>
   );
 }
