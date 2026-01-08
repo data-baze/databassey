@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -39,20 +39,20 @@ const Header = () => {
         text-brand-primary text-xs md:text-sm font-normal 
         space-x-4 md:space-x-6 "
       >
-        <Link to={"/"} className="text-base md:text-xl font-light">
+        <NavLink to={"/"} className="text-base md:text-xl font-light">
           Data.
-        </Link>
+        </NavLink>
 
         <div className="flex md:hidden gap-3 items-center">
-          <Link to="/about" className="hover:text-brand-primary/60 transition">
+          <a href="/about" className="hover:text-brand-primary/60 transition">
             ABOUT
-          </Link>
-          <Link
+          </a>
+          <NavLink
             to="/contact"
             className="hover:text-brand-primary/60 transition"
           >
             CONTACT
-          </Link>
+          </NavLink>
 
           <a
             href="mailto:basseydata@gmail.com"
@@ -64,11 +64,11 @@ const Header = () => {
         </div>
 
         <div className="hidden md:flex gap-4">
-          <a href="/#service">SERVICES</a>
+          {/* <a href="/#service">SERVICES</a> */}
           {/* <Link to="/work">WORK</Link> */}
-          <Link to="/about">ABOUT</Link>
-          {/* <Link to="/blog">BLOG</Link> */}
-          <Link to="/contact">CONTACT</Link>
+          <NavLink to="/about">ABOUT</NavLink>
+          {/* <NavLink to="/blog">BLOG</NavLink> */}
+          <NavLink to="/contact">CONTACT</NavLink>
         </div>
 
         <a
@@ -104,14 +104,14 @@ const Header = () => {
       >
         <div className="flex flex-col space-y-4 text-sm">
           {menuLinks.map((item) => (
-            <Link
+            <NavLink
               key={item.to}
               to={item.to}
               onClick={() => setOpen(false)}
               className="hover:text-brand-primary/60 transition"
             >
               {item.label}
-            </Link>
+            </NavLink>
           ))}
         </div>
 

@@ -10,6 +10,14 @@ const Footer = () => {
     { name: "SERVICES", href: "/services" },
     { name: "CONTACT", href: "/contact" },
   ];
+
+  const scrollToTop = () => {
+    () =>
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+  };
   return (
     <footer>
       <div className="bg-brand-primary/10 w-full py-3 overflow-x-hidden whitespace-nowrap flex gap-6">
@@ -145,10 +153,22 @@ const Footer = () => {
         </div>
 
         <div className="py-8 flex items-center justify-between text-xs text-brand-primary">
-          <p>© 2025 Made by Data. With ❣️ from Lagos</p>
-          <div className=" text-sm font-normal text-brand-primary flex items-center gap-4">
-            <p>TO TOP</p>
-            <button className="p-2 rounded-full bg-brand-primary/5 border border-brand-primary/15 text-brand-primary">
+          <p>© {new Date().getFullYear()} Made by Data.</p>
+
+          <div
+            className="text-sm font-normal text-brand-primary flex items-center gap-4 cursor-pointer"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              })
+            }
+          >
+            <p className="whitespace-nowrap">TO TOP</p>
+            <button
+              aria-label="Scroll to top"
+              className="p-2 rounded-full bg-brand-primary/5 border border-brand-primary/15 text-brand-primary"
+            >
               <ArrowUp size={14} />
             </button>
           </div>
