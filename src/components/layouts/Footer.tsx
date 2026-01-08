@@ -11,13 +11,6 @@ const Footer = () => {
     { name: "CONTACT", href: "/contact" },
   ];
 
-  const scrollToTop = () => {
-    () =>
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-  };
   return (
     <footer>
       <div className="bg-brand-primary/10 w-full py-3 overflow-x-hidden whitespace-nowrap flex gap-6">
