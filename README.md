@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# Data Bassey — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19, TypeScript, Vite, and React Router. The portfolio covers frontend architecture, full-stack delivery, and technical leadership.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Use Node.js 22 or newer and npm.
 
-## React Compiler
+- `npm install` installs the declared dependencies.
+- `npm run dev` starts the local preview.
+- `npm run build` type-checks, builds, and generates per-route HTML metadata.
+- `npm run preview` serves the production build.
+- `npm test` runs isolated contact-service tests without sending a message.
+- `npm run lint` runs the existing ESLint checks.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Content
 
-## Expanding the ESLint configuration
+`src/content/portfolio.ts` owns case studies, capabilities, career history, and contact links. Information is based on the supplied CVs, prioritized over the previous website.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- The full-stack CV supplies the general engineering profile and MSORG role.
+- The frontend CV also supplies Trade Intelligence Portal and Dancity project summaries.
+- Education uses the CV dates: BSc 2022; OND 2019.
+- Concurrent MSORG and Payvessel roles are explicitly explained.
+- Supplied PDF files are copied unchanged into `public/cv/`.
+- Project diagrams summarize CV-described workflows. They are not product screenshots.
+- No unsupported portfolio-only impact percentages, invented delivery dates, client endorsements, or demo links are published.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Routes: `/`, `/work`, `/work/:slug`, `/about`, `/resume`, `/contact`. The former `/services` route redirects to Contact; `/cv` redirects to `/resume`. Existing PDF asset paths remain compatible. Unknown routes show a useful 404 screen.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Payvessel and Dancity lead the selected-work cards, with CV-backed KYC, transfer, wallet, card-management, and merchant-operations features. The enterprise innovation, conversational banking, and trade intelligence project names are anonymized in the website, URLs, and metadata. Downloadable resumes remain the supplied, unedited PDFs.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Contact delivery
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Copy `.env.example` to `.env` and set `VITE_WEB3FORMS_KEY`. Vite embeds this public form access key into the client build; never put a private server credential in a VITE variable. The existing key is preserved locally.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+If no key is configured, Contact offers direct email instead of an unusable form. The form uses a 15-second timeout, a honeypot, field allowlisting, explicit HTTP and service success checks, and an in-flight guard. Failed submissions preserve the visitor’s message. An accessible status area announces the result.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Automated tests mock the service. Real inbox delivery still needs a controlled submission with the configured account; automated checks do not send mail.
+
+## Deployment
+
+Publish `dist/` using the existing hosting setup. `public/_redirects` supports Netlify/Cloudflare Pages-style SPA fallback. For another host, configure unknown application paths to serve `index.html`, while serving generated route HTML and real assets first.
+
+The build creates HTML metadata for each route so link previews do not rely on JavaScript execution. Page bodies remain a client-rendered SPA. The canonical domain is `https://databassey.com.ng`; update `src/components/Seo.tsx`, `scripts/static-metadata.mjs`, `public/robots.txt`, and `public/sitemap.xml` together if the domain changes.
+
+## Adding project evidence
+
+Add permitted product screenshots when available, with descriptive alt text, reserved dimensions, and captions identifying the workflow and personal contribution. Replace or supplement the existing workflow diagrams. Do not present reconstructed interfaces as actual project screenshots.

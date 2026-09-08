@@ -1,43 +1,32 @@
-import { useState } from "react";
+import { useRef, useState } from 'react';
+import type { FormEvent } from 'react';
+import { submitContact } from '../submitContact';
 
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || "";
-
-type FormStatus = "idle" | "loading" | "success" | "error";
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY?.trim() || '';
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export function useContactForm() {
-  const [status, setStatus] = useState<FormStatus>("idle");
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const inFlight = useRef(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (status === "loading") return; // prevent double submit
-    setStatus("loading");
-
+    if (inFlight.current) return;
+    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
+    if (!WEB3FORMS_KEY) { setStatus('error'); return; }
+    inFlight.current = true;
+    setStatus('loading');
     try {
-      const formData = new FormData(event.currentTarget);
-      formData.append("access_key", WEB3FORMS_KEY);
-      console.log("key", WEB3FORMS_KEY);
-
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(Object.fromEntries(formData)),
-      });
-
-      const result = await response.json();
-
-      if (response.ok || result.success === true) {
-        setStatus("success");
-        event.currentTarget.reset();
-      } else {
-        setStatus("error");
-      }
+      await submitContact(new FormData(form), WEB3FORMS_KEY);
+      form.reset();
+      setStatus('success');
     } catch {
-      setStatus("error");
+      setStatus('error');
+    } finally {
+      inFlight.current = false;
     }
   };
 
-  return { handleSubmit, status };
+  return { handleSubmit, status, configured: Boolean(WEB3FORMS_KEY) };
 }

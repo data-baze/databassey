@@ -1,100 +1,27 @@
-import { ArrowUpRight } from "lucide-react";
-import { socials } from "../../components/utils/constants";
-import { useContactForm } from "./hooks/useContactForm";
+import { ArrowUpRight, LoaderCircle } from 'lucide-react';
+import Seo from '../../components/Seo';
+import { contact } from '../../content/portfolio';
+import { useContactForm } from './hooks/useContactForm';
 
 export default function Contact() {
-  const { handleSubmit, status } = useContactForm();
-  return (
-    <div className="text-brand-primary">
-      <section className="px-4 md:px-20 lg:px-40 md:pt-28 pt-4 pb-10 md:pb-20">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-          {/* Image */}
-          <img
-            src="/images/new.png"
-            alt="portrait"
-            className="h-80 w-80 object-cover opacity-80 mb-10 mask-[linear-gradient(to_bottom,#0E0E0E_70%,transparent_92%)]"
-          />
-
-          {/* Form + Socials */}
-          <div className="w-full">
-            {/* Contact Form */}
-            <div className="bg-white/5 border border-brand-primary/15 p-8">
-              <h2 className="text-xl mb-6">Let’s get in touch.</h2>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Name"
-                  className="w-full bg-brand-primary/5 border border-brand-primary/15 
-                             text-brand-primary px-4 py-3 focus:outline-none"
-                />
-
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email"
-                  className="w-full bg-brand-primary/5 border border-brand-primary/15 
-                             text-brand-primary px-4 py-3 focus:outline-none"
-                />
-
-                <textarea
-                  name="message"
-                  required
-                  rows={5}
-                  placeholder="Message"
-                  className="w-full bg-brand-primary/5 border border-brand-primary/15 
-                             text-brand-primary px-4 py-3 focus:outline-none"
-                />
-
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="w-full bg-brand-primary text-black py-3 text-sm font-medium 
-                             hover:opacity-90 transition disabled:opacity-50"
-                >
-                  {status === "loading" ? "SENDING..." : "SEND MESSAGE"}
-                </button>
-
-                {status === "success" && (
-                  <p className="text-green-500 text-sm">
-                    Message sent successfully.
-                  </p>
-                )}
-
-                {status === "error" && (
-                  <p className="text-red-500 text-sm">
-                    Something went wrong. Please try again.
-                  </p>
-                )}
-              </form>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 mt-3">
-              {socials.map(({ name, icon: Icon, href }, i) => (
-                <a
-                  key={i}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-between items-center 
-                             bg-brand-primary/5 border border-brand-primary/15 
-                             px-4 py-3 text-xs
-                             hover:bg-brand-primary/10 transition"
-                >
-                  <div className="flex gap-2 items-center text-brand-primary/80">
-                    <Icon size={15} />
-                    <p>{name}</p>
-                  </div>
-                  <ArrowUpRight size={14} />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+  const { handleSubmit, status, configured } = useContactForm();
+  return <div className="container">
+    <Seo title="Contact" description="Contact Data Bassey for engineering opportunities and project enquiries. Based in Lagos, Nigeria." />
+    <section className="page-intro"><p className="eyebrow">Contact / Start a conversation</p><h1>Your next product.<br /><span className="serif">Our next conversation.</span></h1><p>For engineering opportunities or project enquiries, email me directly or leave a message below.</p></section>
+    <section className="contact-grid section" aria-label="Contact details and message form"><div className="contact-details"><p className="eyebrow">Email me directly</p><a className="contact-email" href={`mailto:${contact.email}`}>{contact.email}<ArrowUpRight size={22} aria-hidden="true" /></a><p>Lagos, Nigeria<br /><span className="muted">West Africa Time · UTC+1</span></p><div className="contact-socials"><a className="text-link" href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn<ArrowUpRight size={18} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a><a className="text-link" href={contact.github} target="_blank" rel="noreferrer">GitHub<ArrowUpRight size={18} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a></div><div className="contact-note"><h2>A little context helps.</h2><p>For a role, share the team and what you’re building. For a project, tell me about the problem, scope, and any delivery constraints.</p></div></div>
+      <div className="contact-form-card"><h2>Leave a message.</h2><p className="muted">All fields are required.</p>
+        {configured ? <form onSubmit={handleSubmit}>
+          <fieldset disabled={status === 'loading'}>
+            <div className="form-row"><div className="field"><label htmlFor="contact-name">Name</label><input id="contact-name" name="name" autoComplete="name" required maxLength={120} /></div><div className="field"><label htmlFor="contact-email">Email</label><input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} /></div></div>
+            <div className="field"><label htmlFor="contact-type">What would you like to discuss?</label><select id="contact-type" name="enquiry_type" required defaultValue=""><option value="" disabled>Select an enquiry type</option><option value="Engineering role">Engineering role</option><option value="Project enquiry">Project enquiry</option><option value="Other">Other</option></select></div>
+            <div className="field"><label htmlFor="contact-message">Message</label><textarea id="contact-message" name="message" required rows={6} maxLength={5000} aria-describedby="message-help" /><p id="message-help" className="small muted">A short introduction and a few details are enough.</p></div>
+            <div hidden aria-hidden="true"><label htmlFor="contact-botcheck">Leave this empty</label><input id="contact-botcheck" name="botcheck" tabIndex={-1} autoComplete="off" /></div>
+            <button className="button primary" type="submit" disabled={status === 'loading'}>{status === 'loading' ? 'Sending…' : 'Send message'}{status === 'loading' ? <LoaderCircle className="loading-spinner" size={18} aria-hidden="true" /> : <ArrowUpRight size={18} aria-hidden="true" />}</button>
+          </fieldset>
+          <p className="small muted form-privacy">Your details are sent through Web3Forms to deliver your enquiry.</p>
+          <div className="form-status" role="status" aria-live="polite" aria-atomic="true">{status === 'success' && <p className="success-message">Your message has been sent. Thank you for getting in touch.</p>}{status === 'error' && <p className="error-message">Your message could not be confirmed as sent. Your text is still here—try again, or <a href={`mailto:${contact.email}`}>email me directly</a>.</p>}</div>
+        </form> : <div className="callout"><p>Please email me directly to start a conversation.</p><a className="text-link" href={`mailto:${contact.email}`}>Send an email<ArrowUpRight size={18} aria-hidden="true" /></a></div>}
+      </div>
+    </section>
+  </div>;
 }

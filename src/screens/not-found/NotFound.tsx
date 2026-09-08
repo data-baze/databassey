@@ -1,35 +1,10 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Seo from '../../components/Seo';
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen bg-brand-black flex flex-col items-center justify-center text-brand-primary px-6">
-      {/* Big 404 */}
-      <h1 className="text-[100px] md:text-[160px] font-light leading-none text-brand-primary/20 tracking-widest mb-4">
-        404
-      </h1>
-
-      {/* Message */}
-      <p className="text-lg md:text-xl text-brand-primary/60 -mt-4 mb-6">
-        The page you're looking for doesn’t exist.
-      </p>
-
-      {/* Button */}
-      <Link
-        to="/"
-        className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-brand-black 
-                    text-sm font-medium border border-brand-primary/10 
-                   hover:bg-brand-secondary hover:text-brand-primary hover:border-brand-primary
-                   transition"
-      >
-        <ArrowLeft size={16} />
-        Go Back Home
-      </Link>
-
-      {/* Subtle fade animation */}
-      <div className="animate-pulse mt-10 text-xs text-brand-primary/30">
-        Lost in the void of the internet...
-      </div>
-    </div>
-  );
+  return <section className="container not-found">
+    <Seo title="Page not found" description="This page could not be found. Explore Data Bassey's selected engineering work or return home." noIndex />
+    <p className="eyebrow">404 / Page not found</p><h1>A missing page.<br /><span className="serif">A way forward.</span></h1><p>This address doesn’t lead to a page. My selected work is a good place to start.</p><div className="actions"><Link className="button primary" to="/work">Explore my work<ArrowUpRight size={18} aria-hidden="true" /></Link><Link className="text-link" to="/"><ArrowLeft size={18} aria-hidden="true" />Back home</Link></div>
+  </section>;
 }
