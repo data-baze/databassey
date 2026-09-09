@@ -12,13 +12,16 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.0",
+    "@supabase/supabase-js": "^2.116.0",
     "@tailwindcss/vite": "^4.1.17",
     "chart.js": "^4.5.1",
+    "fast-xml-parser": "^5.11.1",
     "framer-motion": "^12.23.26",
     "lucide-react": "^0.554.0",
     "react": "^19.2.0",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.2.0",
+    "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.6",
     "tailwindcss": "^4.1.17"

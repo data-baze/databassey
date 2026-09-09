@@ -13,6 +13,8 @@ const routes = [
   ['/about', 'About & experience', 'Meet Data Bassey, a Lagos-based senior software engineer with experience across fintech, banking, insurance, enterprise applications, and engineering leadership.'],
   ['/resume', 'Download resume', 'Download Data Bassey’s frontend or full-stack engineering resume, with professional experience, selected projects, skills, and education.'],
   ['/contact', 'Contact', 'Contact Data Bassey for engineering opportunities and project enquiries. Based in Lagos, Nigeria.'],
+  ['/blog', 'Blog', 'Writing by Data Bassey on frontend engineering, fintech, and building software. Articles from this portfolio, Medium, and LinkedIn.'],
+  ['/studio', 'Blog editor', 'Private writing workspace for Data Bassey.'],
   ...projects.map(project => ['/work/' + project.slug, project.name, project.summary]),
 ];
 const template = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
@@ -31,7 +33,7 @@ for (const [route, title, description] of routes) {
     '<meta name="twitter:card" content="summary" />',
     '<meta name="twitter:title" content="' + fullTitle + '" />',
     '<meta name="twitter:description" content="' + desc + '" />',
-    '<meta name="robots" content="index, follow" />',
+    '<meta name="robots" content="' + (route === '/studio' ? 'noindex' : 'index, follow') + '" />',
     '<link rel="canonical" href="' + url + '" />',
   ].join('\n    ');
   const directory = resolve('dist', '.' + route);
