@@ -2,7 +2,7 @@
 import { useLocation } from 'react-router-dom';
 
 const targets = [
-  '.project-card', '.button', '.text-link', '.nav-link', '.wordmark',
+  '.project-card', '.post-card', '.button', '.text-link', '.nav-link', '.wordmark',
   '.menu-toggle', '.system-controls button', '.capabilities article',
   '.approach-grid article', '.cv-card', '.experience-list > li',
   '.contact-form-card', '.project-feature-row', '.next-project',

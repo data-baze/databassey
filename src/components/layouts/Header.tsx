@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 
-const links = [{ to: '/work', label: 'Work' }, { to: '/about', label: 'About' }, { to: '/resume', label: 'Resume' }, { to: '/contact', label: 'Contact' }];
+const links = [{ to: '/work', label: 'Work' }, { to: '/about', label: 'About' }, { to: '/blog', label: 'Blog' }, { to: '/resume', label: 'Resume' }, { to: '/contact', label: 'Contact' }];
 
 export default function Header() {
   const [open, setOpen] = useState(false);

@@ -39,7 +39,9 @@ Automated tests mock the service. Real inbox delivery still needs a controlled s
 
 ## Deployment
 
-Publish `dist/` using the existing hosting setup. `public/_redirects` supports Netlify/Cloudflare Pages-style SPA fallback. For another host, configure unknown application paths to serve `index.html`, while serving generated route HTML and real assets first.
+Deploy this repository to Vercel. `vercel.json` sets the build/output directory and serves files and API functions before the SPA fallback. `api/medium.js` requires Vercel's Node runtime. `public/_redirects` is retained for older static hosting setups; those hosts need an equivalent Medium backend.
+
+The blog is at `/blog`, original articles at `/blog/:slug`, and the private writing editor at `/studio`. See [the blog setup guide](docs/blog-setup.md) for the one-time Supabase connection, Vercel variables, editor account, and publishing workflow. Medium uses automatic RSS; LinkedIn posts are curated through the editor. No Supabase credentials are committed or preconfigured.
 
 The build creates HTML metadata for each route so link previews do not rely on JavaScript execution. Page bodies remain a client-rendered SPA. The canonical domain is `https://databassey.com.ng`; update `src/components/Seo.tsx`, `scripts/static-metadata.mjs`, `public/robots.txt`, and `public/sitemap.xml` together if the domain changes.
 

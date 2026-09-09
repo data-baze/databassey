@@ -6,9 +6,10 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { createServer } from 'vite';
+import { createServer as createHttpServer } from 'node:http';
 
 test('every portfolio page renders and its internal links and assets resolve', async () => {
-  const server = await createServer({ server: { middlewareMode: true }, appType: 'custom', logLevel: 'error' });
+  const server = await createServer({ server: { middlewareMode: true, hmr: { server: createHttpServer() } }, optimizeDeps: { noDiscovery: true, include: [] }, appType: 'custom', logLevel: 'error' });
   try {
     const pages = [
       ['/', '/src/screens/home/Home.tsx', 'Frontend architecture.'],
@@ -16,6 +17,8 @@ test('every portfolio page renders and its internal links and assets resolve', a
       ['/about', '/src/screens/about/About.tsx', 'University of Abuja'],
       ['/resume', '/src/screens/cv/Cv.tsx', 'Download frontend resume'],
       ['/contact', '/src/screens/contact/Contact.tsx', 'basseydata@gmail.com'],
+      ['/blog', '/src/screens/blog/Blog.tsx', 'Notes from the work'],
+      ['/studio', '/src/screens/blog/Studio.tsx', 'Private editor'],
       ['/work/payvessel', '/src/screens/work/Project.tsx', 'Payvessel'],
       ['/work/dancity', '/src/screens/work/Project.tsx', 'Dancity v2'],
       ['/work/enterprise-innovation', '/src/screens/work/Project.tsx', 'Enterprise Innovation Platform'],

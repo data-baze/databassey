@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Seo from '../../components/Seo';
 import ProjectCard from '../../components/ProjectCard';
 import HeroSystem from '../../components/HeroSystem';
+import LatestWriting from '../../components/blog/LatestWriting';
 import { capabilities, projects } from '../../content/portfolio';
 
 export default function Home() {
@@ -25,5 +26,6 @@ export default function Home() {
     <section className="leadership-band"><div className="container leadership"><div><p className="eyebrow">02 / Leadership & delivery</p><h2>Beyond the<br /><span className="serif">individual feature.</span></h2><p>I’ve led engineers, established reusable frontend foundations, and worked across product and backend teams to turn requirements into working applications.</p><Link className="text-link" to="/about">My experience<ArrowUpRight size={18} aria-hidden="true" /></Link></div><div className="proof-points"><div><strong>8</strong><span>Engineers led at MSORG Developers</span></div><div><strong>9+</strong><span>Production applications with frontend architecture ownership at MSORG</span></div><div><strong>2020</strong><span>The start of my professional web development journey</span></div></div></div></section>
     <section className="container section"><div className="section-heading"><div><p className="eyebrow">03 / Engineering capabilities</p><h2>Built on clear<br /><span className="serif">technical foundations.</span></h2></div></div><div className="capabilities">{capabilities.map((item, index) => <article key={item.title}><span className="eyebrow">0{index + 1}</span><h3>{item.title}</h3><p>{item.text}</p><Link className="text-link" to={item.project ? `/work/${item.project}` : '/about'}>{item.example}<ArrowUpRight size={17} aria-hidden="true" /></Link></article>)}</div></section>
     <section className="container about-preview"><p className="eyebrow">The person behind the work</p><div><h2>Clarity for users.<br /><span className="serif">Confidence for teams.</span></h2><p>My work sits at the intersection of user workflows and maintainable software. I care about what happens after the happy path: changing data, permissions, error states, and the next engineer who works on the feature.</p><Link className="text-link" to="/about">More about me<ArrowUpRight size={18} aria-hidden="true" /></Link></div></section>
+    <LatestWriting />
   </>;
 }
